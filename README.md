@@ -9,7 +9,27 @@ Sockets Links.
  server .
 4. Send and receive the message using the send function in socket.
 ## PROGRAM
-![Screenshot (10)](https://github.com/user-attachments/assets/a9c846b8-ff85-4622-a91b-16c3894f4f40)
+## Client.py
+```
+import socket
+s=socket.socket()
+s.connect(('localhost',8000))
+while True:
+    msg=input("Client > ")
+    s.send(msg.encode())
+    print("Server > ",s.recv(1024).decode())
+```
+## Server.py
+```
+import socket
+s=socket.socket()
+s.bind(('localhost',8000))
+s.listen(5)
+c,addr=s.accept()
+while True:
+    ClientMessage=c.recv(1024).decode()
+    c.send(ClientMessage.encode())
+```
 
 ## OUPUT
 ![3a client](https://github.com/user-attachments/assets/81056e02-8011-4744-a512-71fdb71ee206)
